@@ -60,7 +60,7 @@ dependencies {
     modImplementation "com.terraformersmc:modmenu:${modmenu_version}"
 
     // JCEF
-    modImplementation "me.friwi:jcefmaven:${jcef_version}"
+    include(modImplementation("me.friwi:jcefmaven:${jcef_version}"))
 
     testmodImplementation sourceSets.main.output
     testmodAnnotationProcessor sourceSets.main.output
