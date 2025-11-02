@@ -1,6 +1,7 @@
 plugins {
     id 'fabric-loom' version "${loom_version}"
     id 'maven-publish'
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 version = project.mod_version + "+mc" + project.minecraft_version + ".jcef" + project.jcef_version
@@ -120,6 +121,25 @@ publishing {
                     password mavenToken
                 }
             }
+        }
+    }
+}
+
+def modrinthToken = System.getenv("MODRINTH_TOKEN")
+if (modrinthToken) {
+    modrinth {
+        token = modrinthToken
+        projectId = "mcef-modern"
+        versionNumber = project.mod_version
+        versionType = "release" // This is the default -- can also be `beta` or `alpha`
+        changelog = file('changelog.md').text
+        uploadFile = remapJar
+        gameVersions = ["1.21.10"] // Must be an array, even with only one version
+        dependencies { // A special DSL for creating dependencies
+            // scope.type
+            // The scope can be `required`, `optional`, `incompatible`, or `embedded`
+            // The type can either be `project` or `version`
+            required.project "fabric-api"
         }
     }
 }

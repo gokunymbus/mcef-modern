@@ -86,7 +86,7 @@ public class MCEFApiImpl implements MCEFApi {
                     MCEFModern.LOGGER.error("Failed to initialize MCEF Modern", e);
                     stage = Stage.DONE;
                     percentage = -1;
-                    return null;
+                    throw new RuntimeException("Failed to initialize MCEF Modern", e);
                 }
             });
         }
