@@ -120,12 +120,12 @@ public interface MCEFApi {
             NOT_STARTED,
 
             /**
-             * MCEF resources are being downloaded.
+             * Downloading the native JCef bundle
              */
             DOWNLOADING,
 
             /**
-             * Downloaded resources are being extracted.
+             * Extracting the downloaded/located native bundle
              */
             EXTRACTING,
 
@@ -135,7 +135,7 @@ public interface MCEFApi {
             INSTALL,
 
             /**
-             * MCEF core systems are being initialized.
+             * Initializing for the corresponding platform.
              */
             INITIALIZING,
 
