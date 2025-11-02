@@ -130,10 +130,11 @@ if (modrinthToken) {
     modrinth {
         token = modrinthToken
         projectId = "mcef-modern"
-        versionNumber = project.mod_version
+        versionNumber = project.version
         versionType = "release" // This is the default -- can also be `beta` or `alpha`
         changelog = file('changelog.md').text
         uploadFile = remapJar
+        additionalFiles = [remapSourcesJar]
         gameVersions = ["1.21.10"] // Must be an array, even with only one version
         dependencies { // A special DSL for creating dependencies
             // scope.type
