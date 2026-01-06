@@ -11,6 +11,7 @@ import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.network.chat.Component;
 import org.joml.Matrix3x2f;
 
@@ -29,8 +30,7 @@ public class MCEFTestModScreen extends Screen {
         if (browser == null) {
             browser = MCEFApi.getInstance().createBrowser(
                     "https://youtu.be/dQw4w9WgXcQ",
-                    false
-            );
+                    false);
         }
         browser.resize(width, height);
         browser.setFocus(true);
@@ -42,7 +42,9 @@ public class MCEFTestModScreen extends Screen {
         if (gpuTextureView != null) {
             guiGraphics.guiRenderState.submitGuiElement(new BlitRenderState(
                     RenderPipelines.GUI_TEXTURED,
-                    TextureSetup.singleTexture(gpuTextureView),
+                    TextureSetup.singleTexture(gpuTextureView,
+                            RenderSystem.getSamplerCache()
+                                    .getClampToEdge(com.mojang.blaze3d.textures.FilterMode.LINEAR)),
                     new Matrix3x2f(guiGraphics.pose()),
                     0,
                     0,
@@ -53,8 +55,7 @@ public class MCEFTestModScreen extends Screen {
                     0.0F,
                     1.0F,
                     0xFFFFFFFF,
-                    guiGraphics.scissorStack.peek()
-            ));
+                    guiGraphics.scissorStack.peek()));
         }
         guiGraphics.requestCursor(browser.getCursorType());
     }

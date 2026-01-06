@@ -26,8 +26,9 @@ public class MCEFApiImpl implements MCEFApi {
         cefAppBuilder.addJcefArgs(
                 "--autoplay-policy=no-user-gesture-required",
                 "--disable-web-security",
-                "--enable-widevine-cdm"
-        );
+                "--enable-widevine-cdm",
+                "--disable-gpu",
+                "--disable-gpu-compositing");
         cefApp = cefAppBuilder.build();
 
         CefSettings cefSettings = new CefSettings();
@@ -61,8 +62,7 @@ public class MCEFApiImpl implements MCEFApi {
                 url,
                 transparent,
                 CefRequestContext.getGlobalContext(),
-                null
-        );
+                null);
         browser.setCloseAllowed();
         browser.createImmediately();
         return browser;
